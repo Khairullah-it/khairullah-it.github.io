@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khairullah Ahmadi - Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#ff1b45',secondary:'#d5451b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2E2E2E;
+            background-color: #f4e7e1;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=professional%20modern%20gradient%20background%20with%20soft%20light%20effect%2C%20transitioning%20from%20light%20pink%20to%20deep%20red%20on%20the%20right%20side%2C%20clean%20and%20minimal%20design%20perfect%20for%20web%20developer%20portfolio%2C%20soft%20texture%2C%20high%20quality%2C%208k&width=1920&height=1080&seq=1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #ff1b45;
+            border: 3px solid #f4e7e1;
+            z-index: 1;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 16px;
+            bottom: -16px;
+            width: 2px;
+            background-color: #ff1b45;
+            opacity: 0.3;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        input[type="checkbox"].toggle {
+            opacity: 0;
+            position: absolute;
+            left: -9000px;
+            top: -9000px;
+        }
+        input[type="checkbox"].toggle + label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        input[type="checkbox"].toggle + label::before {
+            content: "";
+            width: 3em;
+            height: 1.5em;
+            background-color: #ddd;
+            border-radius: 1em;
+            margin-right: 0.5em;
+            transition: background-color 200ms ease-in-out;
+        }
+        input[type="checkbox"].toggle + label::after {
+            position: absolute;
+            content: "";
+            width: 1.2em;
+            height: 1.2em;
+            background-color: white;
+            border-radius: 1em;
+            left: 0.15em;
+            transition: transform 200ms ease-in-out;
+        }
+        input[type="checkbox"].toggle:checked + label::before {
+            background-color: #ff1b45;
+        }
+        input[type="checkbox"].toggle:checked + label::after {
+            transform: translateX(1.5em);
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(255, 27, 69, 0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(255, 27, 69, 0.1);
+        }
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(255, 27, 69, 0.1);
+        }
+        .social-icon:hover {
+            color: #ff1b45;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-primary font-['Pacifico'] text-2xl">Khairullah</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary font-medium">About</a>
+                    <a href="#skills" class="text-gray-700 hover:text-primary font-medium">Skills</a>
+                    <a href="#services" class="text-gray-700 hover:text-primary font-medium">Services</a>
+                    <a href="#portfolio" class="text-gray-700 hover:text-primary font-medium">Portfolio</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary font-medium">Contact</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center text-gray-700">
+                        <i class="ri-menu-line ri-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Skills</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Services</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Portfolio</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section relative min-h-[90vh] flex items-center">
+        <div class="absolute inset-0 bg-gradient-to-r from-white/90 to-transparent"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                    <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                        <img src="profile21.jpeg" alt="Khairullah Ahmadi" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">I'm Khairullah Ahmadi</h1>
+                        <p class="text-xl md:text-2xl text-gray-700 mb-8">A passionate Full Stack Developer and IT specialist</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#portfolio" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-secondary transition-colors duration-300 whitespace-nowrap">View Portfolio</a>
+                            <a href="#contact" class="bg-white text-primary border border-primary px-6 py-3 rounded-button font-medium hover:bg-gray-50 transition-colors duration-300 whitespace-nowrap">Contact Me</a>
+                        </div>
+                        <div class="flex mt-8 gap-4">
+                            <a href="https://linkedin.com/in/khairullah-ahmadi" target="_blank" class="social-icon w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-600 transition-all duration-300">
+                                <i class="ri-linkedin-fill ri-lg"></i>
+                            </a>
+                            <a href="https://wa.me/93780629289" target="_blank" class="social-icon w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-600 transition-all duration-300">
+                                <i class="ri-whatsapp-fill ri-lg"></i>
+                            </a>
+                            <a href="mailto:khairullah7806@gmail.com" class="social-icon w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-600 transition-all duration-300">
+                                <i class="ri-mail-fill ri-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">About Me</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-900">Who am I?</h3>
+                    <p class="text-gray-700 mb-6">I am Khairullah Ahmadi, a Computer Science graduate and Full Stack Developer with strong skills in web design, IT support, and graphic design. I'm passionate about creating efficient digital solutions and continuously expanding my technical knowledge.</p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-900">My Journey</h3>
+                    <div class="relative pl-12">
+                        <div class="timeline-item relative pb-8">
+                            <h4 class="text-xl font-medium text-gray-900">IT Manager</h4>
+                            <p class="text-gray-600 text-sm">2023 - Present</p>
+                            <p class="text-gray-700 mt-2">Shukor Qanaat Bakhesh Company</p>
+                            <p class="text-gray-600 mt-1">Managing IT infrastructure, providing technical support, and implementing digital solutions for business operations.</p>
+                        </div>
+                        
+                        <div class="timeline-item relative pb-8">
+                            <h4 class="text-xl font-medium text-gray-900">Computer Science Teacher</h4>
+                            <p class="text-gray-600 text-sm">2021 - 2023</p>
+                            <p class="text-gray-700 mt-2">Private Educational Institution</p>
+                            <p class="text-gray-600 mt-1">Taught computer science fundamentals, programming concepts, and practical IT skills to students.</p>
+                        </div>
+                        
+                        <div class="timeline-item relative pb-8">
+                            <h4 class="text-xl font-medium text-gray-900">Computer Science Degree</h4>
+                            <p class="text-gray-600 text-sm">2017 - 2021</p>
+                            <p class="text-gray-700 mt-2">Jowzjan University</p>
+                            <p class="text-gray-600 mt-1">Studied computer science with focus on programming, database management, and web development.</p>
+                        </div>
+                        
+                        <div class="timeline-item relative">
+                            <h4 class="text-xl font-medium text-gray-900">Graphic Design Course</h4>
+                            <p class="text-gray-600 text-sm">2019</p>
+                            <p class="text-gray-700 mt-2">ACTED</p>
+                            <p class="text-gray-600 mt-1">Completed intensive training in graphic design principles and tools.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-primary/5 rounded-2xl transform rotate-3"></div>
+                        <img src="profile2.jpeg" alt="Khairullah Ahmadi Working" class="relative rounded-lg shadow-lg w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">My Skills</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+                <p class="text-gray-600 mt-6 max-w-2xl mx-auto">I've developed a diverse set of skills throughout my career, focusing on web development, IT support, and design.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Web Development Skills -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-html5-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">HTML</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-css3-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">CSS</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-javascript-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">JavaScript</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-bootstrap-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">Bootstrap</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-jquery-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">jQuery</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-database-2-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">MySQL</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <!-- IT Skills -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-windows-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">Windows OS</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-microsoft-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">MS Office</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-router-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">Networking</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-camera-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">Camera Setup</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                
+                <!-- Design Skills -->
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-photoshop-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">Photoshop</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card bg-white p-6 rounded-lg shadow-sm transition-all duration-300">
+                    <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full mb-4 mx-auto">
+                        <i class="ri-layout-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-center text-gray-900">UI Design</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3">
+                        <div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">My Services</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+                <p class="text-gray-600 mt-6 max-w-2xl mx-auto">I offer professional services in web development and IT support to help businesses and individuals achieve their digital goals.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="service-card bg-white border border-gray-100 rounded-xl shadow-sm p-8 transition-all duration-300">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mb-6">
+                        <i class="ri-code-s-slash-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Web Design & Development</h3>
+                    <p class="text-gray-600 mb-6">I create modern, responsive websites using the latest frontend technologies and MySQL integration. My websites are optimized for performance and user experience.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Responsive website design</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Frontend development (HTML, CSS, JS)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Database integration with MySQL</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Performance optimization</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="service-card bg-white border border-gray-100 rounded-xl shadow-sm p-8 transition-all duration-300">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mb-6">
+                        <i class="ri-computer-line ri-xl text-primary"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">IT Support & Consulting</h3>
+                    <p class="text-gray-600 mb-6">I provide comprehensive IT support services including system management, troubleshooting, and basic networking solutions for businesses and individuals.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">System setup and management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Hardware and software troubleshooting</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Network configuration and security</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-0.5 mr-2">
+                                <i class="ri-check-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-700">Camera installation and setup</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">My Portfolio</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+                <p class="text-gray-600 mt-6 max-w-2xl mx-auto">Here are some of the projects I've worked on. Each project demonstrates my skills and expertise in different areas.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Featured Project -->
+                <div class="portfolio-card bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=admin%20dashboard%20interface%20for%20brick%20company%20management%20system%2C%20showing%20inventory%2C%20orders%2C%20and%20analytics%2C%20modern%20UI%20design%20with%20data%20tables%20and%20charts%2C%20professional%20business%20application%20interface%2C%20high%20quality&width=600&height=400&seq=4&orientation=landscape" alt="Admin Panel Project" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                            <div class="p-4">
+                                <span class="text-xs font-medium text-white bg-primary/80 px-2 py-1 rounded-full">Featured Project</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Admin Panel for Brick Company</h3>
+                        <p class="text-gray-600 mb-4">A comprehensive admin dashboard for managing inventory, orders, and analytics for a brick manufacturing company.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">HTML</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">CSS</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">Bootstrap</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">jQuery</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">MySQL</span>
+                        </div>
+                        <button class="view-project-btn bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-secondary transition-colors duration-300 whitespace-nowrap w-full" data-project="project1">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Future Project Placeholders -->
+                <div class="portfolio-card bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+                    <div class="relative h-56 overflow-hidden bg-gray-100 flex items-center justify-center">
+                        <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full">
+                            <i class="ri-code-s-slash-line ri-xl text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">E-commerce Website</h3>
+                        <p class="text-gray-600 mb-4">A responsive e-commerce platform with product catalog, shopping cart, and secure checkout functionality.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">HTML</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">CSS</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">PHP</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">MySQL</span>
+                        </div>
+                        <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded-button font-medium hover:bg-gray-300 transition-colors duration-300 whitespace-nowrap w-full">Coming Soon</button>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+                    <div class="relative h-56 overflow-hidden bg-gray-100 flex items-center justify-center">
+                        <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full">
+                            <i class="ri-layout-line ri-xl text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">School Management System</h3>
+                        <p class="text-gray-600 mb-4">A comprehensive system for managing students, teachers, classes, and administrative tasks for educational institutions.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">HTML</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">CSS</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">PHP</span>
+                            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">MySQL</span>
+                        </div>
+                        <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded-button font-medium hover:bg-gray-300 transition-colors duration-300 whitespace-nowrap w-full">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+                <h3 id="modal-title" class="text-xl font-semibold text-gray-900">Project Details</h3>
+                <button id="close-modal" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700">
+                    <i class="ri-close-line ri-lg"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="p-6">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Get In Touch</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+                <p class="text-gray-600 mt-6 max-w-2xl mx-auto">Have a project in mind or need IT support? Feel free to contact me. I'm always open to discussing new projects and opportunities.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">Email</h4>
+                                <a href="mailto:khairullah7806@gmail.com" class="text-gray-600 hover:text-primary">khairullah7806@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                                <i class="ri-phone-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">Phone</h4>
+                                <a href="tel:0780629289" class="text-gray-600 hover:text-primary">0780629289</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                                <i class="ri-whatsapp-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">WhatsApp</h4>
+                                <a href="https://wa.me/93780629289" class="text-gray-600 hover:text-primary">+93 780629289</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-4 mt-1">
+                                <i class="ri-linkedin-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">LinkedIn</h4>
+                                <a href="https://linkedin.com/in/khairullah-ahmadi" target="_blank" class="text-gray-600 hover:text-primary">Khairullah Ahmadi</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Follow Me</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://linkedin.com/in/khairullah-ahmadi" target="_blank" class="social-icon w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 transition-all duration-300">
+                                <i class="ri-linkedin-fill ri-lg"></i>
+                            </a>
+                            <a href="https://github.com/khairullah-ahmadi" target="_blank" class="social-icon w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 transition-all duration-300">
+                                <i class="ri-github-fill ri-lg"></i>
+                            </a>
+                            <a href="https://twitter.com/khairullah_dev" target="_blank" class="social-icon w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 transition-all duration-300">
+                                <i class="ri-twitter-fill ri-lg"></i>
+                            </a>
+                            <a href="https://instagram.com/khairullah.dev" target="_blank" class="social-icon w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 transition-all duration-300">
+                                <i class="ri-instagram-fill ri-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send Me a Message</h3>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors" placeholder="Enter subject">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors resize-none" placeholder="Enter your message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-secondary transition-colors duration-300 whitespace-nowrap">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Khairullah Ahmadi</h3>
+                    <p class="text-gray-400 mb-6">Full Stack Developer and IT Specialist based in Afghanistan, focused on creating efficient digital solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://linkedin.com/in/khairullah-ahmadi" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-linkedin-fill ri-lg"></i>
+                        </a>
+                        <a href="https://github.com/khairullah-ahmadi" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-github-fill ri-lg"></i>
+                        </a>
+                        <a href="https://twitter.com/khairullah_dev" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-twitter-fill ri-lg"></i>
+                        </a>
+                        <a href="https://instagram.com/khairullah.dev" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-instagram-fill ri-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#skills" class="text-gray-400 hover:text-white transition-colors">Skills</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Web Design</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Web Development</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Database Integration</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">IT Support</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Network Configuration</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-400">khairullah7806@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                <i class="ri-phone-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-400">0780629289</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                <i class="ri-whatsapp-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-400">+93 780629289</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2025 Khairullah Ahmadi. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                    <p class="text-gray-400 text-sm">Designed with <i class="ri-heart-fill text-primary text-xs"></i> by Khairullah Ahmadi</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script id="mobile-menu-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+
+    <!-- Smooth Scroll Script -->
+    <script id="smooth-scroll-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Adjust for header height
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Project Modal Script -->
+    <script id="project-modal-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('project-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const viewProjectButtons = document.querySelectorAll('.view-project-btn');
+            
+            // Project data
+            const projectData = {
+                project1: {
+                    title: 'Admin Panel for Brick Company',
+                    description: 'A comprehensive admin dashboard built for a brick manufacturing company to manage inventory, track orders, and analyze sales data. The system provides real-time insights and streamlines business operations.',
+                    features: [
+                        'User authentication and role-based access control',
+                        'Inventory management with low stock alerts',
+                        'Order processing and tracking system',
+                        'Customer management database',
+                        'Sales analytics and reporting dashboard',
+                        'Invoice generation and management',
+                        'Employee attendance and performance tracking'
+                    ],
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'jQuery', 'MySQL'],
+                    challenges: 'The main challenge was designing a system that could handle large volumes of inventory data while maintaining performance. I implemented database optimization techniques and efficient query structures to ensure smooth operation.',
+                    outcome: 'The system resulted in a 40% reduction in order processing time and significantly improved inventory management accuracy. The client reported increased operational efficiency and better decision-making based on the analytics provided.',
+                    images: [
+                        'https://readdy.ai/api/search-image?query=admin%20dashboard%20interface%20for%20brick%20company%20management%20system%2C%20showing%20inventory%20management%20screen%20with%20product%20listings%2C%20stock%20levels%2C%20and%20category%20filters%2C%20modern%20UI%20design%20with%20data%20tables%2C%20professional%20business%20application%20interface%2C%20high%20quality&width=800&height=500&seq=5&orientation=landscape',
+                        'https://readdy.ai/api/search-image?query=admin%20dashboard%20analytics%20screen%20for%20brick%20company%20management%20system%2C%20showing%20sales%20charts%2C%20revenue%20metrics%2C%20and%20performance%20indicators%2C%20modern%20UI%20design%20with%20graphs%20and%20data%20visualization%2C%20professional%20business%20application%20interface%2C%20high%20quality&width=800&height=500&seq=6&orientation=landscape',
+                        'https://readdy.ai/api/search-image?query=admin%20dashboard%20order%20management%20screen%20for%20brick%20company%20system%2C%20showing%20order%20listings%2C%20status%20updates%2C%20and%20customer%20details%2C%20modern%20UI%20design%20with%20data%20tables%20and%20filters%2C%20professional%20business%20application%20interface%2C%20high%20quality&width=800&height=500&seq=7&orientation=landscape'
+                    ]
+                }
+            };
+            
+            // Open modal with project data
+            viewProjectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project');
+                    const project = projectData[projectId];
+                    
+                    if (project) {
+                        modalTitle.textContent = project.title;
+                        
+                        // Build modal content
+                        let content = `
+                            <div class="space-y-8">
+                                <div class="relative">
+                                    <div class="flex overflow-x-auto space-x-4 pb-4">
+                                        ${project.images.map(img => `
+                                            <div class="flex-shrink-0 w-full md:w-2/3">
+                                                <img src="${img}" alt="${project.title}" class="rounded-lg shadow-md w-full h-auto">
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Project Description</h4>
+                                    <p class="text-gray-700">${project.description}</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Key Features</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Technologies Used</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${project.technologies.map(tech => `
+                                            <span class="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">${tech}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Challenges & Solutions</h4>
+                                    <p class="text-gray-700">${project.challenges}</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-3">Outcome</h4>
+                                    <p class="text-gray-700">${project.outcome}</p>
+                                </div>
+                            </div>
+                        `;
+                        
+                        modalContent.innerHTML = content;
+                        modal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+
+    <!-- Contact Form Script -->
+    <script id="contact-form-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // In a real implementation, you would send this data to a server
+                // For now, we'll just show a success message
+                alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
